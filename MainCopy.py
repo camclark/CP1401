@@ -251,16 +251,18 @@ def orderTicket(userName):
 def main():
     userName = greeting()
     exitProgram = False
+    ticketCost =  []
+
     while not exitProgram:
         print("Tropic Airlines Ticket Ordering System: (I)nstructions, (O)rder ticket or (E)xit");
         userInput = input()
         userInput = userInput.lower()
         if userInput == "o":
-            ticketCost[i] = orderTicket(userName)
-            i = i + 1
+            ticketCost.append(orderTicket(userName))
 
         elif userInput == "e":
-            print(userName + " your orders are: " + ticketCost[i])
+            ticketCost.sort()
+            print(userName + " your orders are: " + ticketCost)
             print("Thank you for choosing Tropical Airlines for your air travel needs.")
             quitProgram = True
         elif userInput == "i":
@@ -270,3 +272,5 @@ def main():
             print("ERROR: Input not recognised. Please enter the letter in brackets to complete the intended action.")
 
 main()
+for x in range(0,len(array)):
+    print array[x]
