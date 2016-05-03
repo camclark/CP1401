@@ -121,7 +121,7 @@ def costCalculation(tripCode, typeCode, classCode, passengerAge):
         tripValue = 420
     elif tripCode == "s2":
         tripValue = 575
-    elif ripCode == "p1":
+    elif tripCode == "p1":
         tripValue = 510
     else:
         tripValue = 700
@@ -243,20 +243,24 @@ def orderTicket(userName):
         print("Your ticket has been purchased. ")
         print("The ticket is as follows: " + check + " Your ticket will cost: " + str(cost) + " ")
         acceptPurchase = True
+    return cost
 
 
 
 
 def main():
     userName = greeting()
-    quitProgram = False
-    while not quitProgram:
-        print("Tropic Airlines Ticket Ordering System: (I)nstructions, (O)rder ticket or (Q)uit");
+    exitProgram = False
+    while not exitProgram:
+        print("Tropic Airlines Ticket Ordering System: (I)nstructions, (O)rder ticket or (E)xit");
         userInput = input()
         userInput = userInput.lower()
         if userInput == "o":
-            orderTicket(userName)
-        elif userInput == "q":
+            ticketCost[i] = orderTicket(userName)
+            i = i + 1
+
+        elif userInput == "e":
+            print(userName + " your orders are: " + ticketCost[i])
             print("Thank you for choosing Tropical Airlines for your air travel needs.")
             quitProgram = True
         elif userInput == "i":
