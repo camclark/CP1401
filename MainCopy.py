@@ -275,7 +275,7 @@ def main():
             else:
                 for price in ticketCost:
                     i = i + 1
-                    print("Ticket " + str(i)+ " " + price)
+                    print("Ticket " + str(i) + " " + price)
 
             print("Thank you for choosing Tropical Airlines for your air travel needs.")
             quitProgram = True
