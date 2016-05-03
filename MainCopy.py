@@ -33,7 +33,12 @@ def getAge():
     switch = False
     while switch == False:
         print("Please enter the passenger's age:")
-        passengerAge = int(input())
+        inputAge = input()
+        while not int(inputAge):
+            inputAge = input()
+
+        passengerAge = int(inputAge)
+
         if passengerAge >= 0 and passengerAge <= 130:
             switch = True
         else:
@@ -262,7 +267,13 @@ def main():
 
         elif userInput == "e":
             ticketCost.sort()
-            print(userName + " your orders are: " + ticketCost)
+            print(userName + " your orders are: ")
+            x = len(ticketCost)
+            i = 0
+            for price in ticketCost:
+                i = i + 1
+                print("Ticket " + str(i)+ " " + price)
+
             print("Thank you for choosing Tropical Airlines for your air travel needs.")
             quitProgram = True
         elif userInput == "i":
@@ -272,5 +283,3 @@ def main():
             print("ERROR: Input not recognised. Please enter the letter in brackets to complete the intended action.")
 
 main()
-for x in range(0,len(array)):
-    print array[x]
