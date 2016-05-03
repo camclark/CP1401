@@ -268,14 +268,18 @@ def main():
         elif userInput == "e":
             ticketCost.sort()
             print(userName + " your orders are: ")
-            x = len(ticketCost)
+            ticketCostLength = len(ticketCost)
             i = 0
-            for price in ticketCost:
-                i = i + 1
-                print("Ticket " + str(i)+ " " + price)
+            if ticketCostLength < 1:
+                print(userName + ", your order is: " + ticketCost + " Your final total is: " + ticketCost)
+            else:
+                for price in ticketCost:
+                    i = i + 1
+                    print("Ticket " + str(i)+ " " + price)
 
             print("Thank you for choosing Tropical Airlines for your air travel needs.")
             quitProgram = True
+
         elif userInput == "i":
             print("Thank you for choosing Tropical Airlines for your air travel needs. You will be asked questions regarding what type of ticket you would like to pruchase as well as destination information. We also offer 50% discounted fares for children under the age of 12. Children under the age of 2 are free.")
             print("You have been returned to the main menu.")
