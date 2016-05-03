@@ -46,6 +46,7 @@ def getAge():
     return passengerAge
 
 def getTripCode():
+    # ask users for destination, return or one way. Ensures users entry matches expected
     switchCode = False
     while switchCode == False:
         print("Please choose a destination and trip length. Fare choices are displayed below: (C1) Cairns One Way - $250. (C2) Cairns Return - $400, (S1) Sydney One Way - $420, (S2) Sydney Return - $575, (P1) Perth One Way - $510, (P2) Perth Return - $700")
@@ -58,6 +59,7 @@ def getTripCode():
     return tripCode
 
 def getClassCode():
+    #asks user for seating class. Ensures users entry matches expected
     switchCode = False
     while switchCode == False:
         print("Please choose the type of fare. Fees are displayed below and are in addition to the basic fare; (B)usiness - $275, (E)conomy - $25, (F)rugal - $0")
@@ -71,6 +73,7 @@ def getClassCode():
     return classCode
 
 def getTypeCode():
+    #asks user for seat location. Ensures users entry matches expected
     switchCode = False
     while switchCode == False:
         print("Please choose the seat type. Choosing the middle seat will deduct 25 from the total fare. (W)indow + $75, (A)isle + $50, (M)iddle - $25")
@@ -83,6 +86,7 @@ def getTypeCode():
     return typeCode
 
 def checkAssign(passengerName, passengerAge, tripCode, classCode, typeCode):
+    # assigns users entry codes to real words.
     if tripCode == "c1":
         tripDestination = "Cairns One Way"
     elif tripCode == "c2":
@@ -114,10 +118,12 @@ def checkAssign(passengerName, passengerAge, tripCode, classCode, typeCode):
     return check
 
 def formatCurrency(cost):
+    # Formats cost
     cost = "${:,.2f}".format(cost)
     return cost
 
 def costCalculation(tripCode, typeCode, classCode, passengerAge):
+    # Calculates cost of trip from expected values
     if tripCode == "c1":
         tripValue = 250
     elif tripCode == "c2":
@@ -159,6 +165,8 @@ def costCalculation(tripCode, typeCode, classCode, passengerAge):
 
 
 def acceptPurchase():
+    # presents user with a y/n to purchase ticket.
+    # should make it to return cost 0 if not accepted
     acceptSwitch = False
     while acceptSwitch == False:
         print("Would you like to purchase this ticket: (Y)es or (N)o ")
@@ -176,6 +184,7 @@ def acceptPurchase():
 
 
 def orderTicket(userName):
+    # Enables user to order tickets, calls functions as needed
     passengerName = getName(userName)
     passengerAge = getAge()
     tripCode = getTripCode()
@@ -266,6 +275,7 @@ def main():
             ticketCost.append(orderTicket(userName))
 
         elif userInput == "e":
+            # exits program
             ticketCost.sort()
             print(userName + " your orders are: ")
             ticketCostLength = len(ticketCost)
