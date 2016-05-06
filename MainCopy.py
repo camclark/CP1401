@@ -45,18 +45,18 @@ def getAge():
             print("Please ensure you entered the correct age of the passenger")
     return passengerAge
 
-def getTripCode():
+def getTripDestination():
     # ask users for destination, return or one way. Ensures users entry matches expected
     switchCode = False
     while switchCode == False:
-        print("Please choose a destination and trip length. Fare choices are displayed below: (C1) Cairns One Way - $250. (C2) Cairns Return - $400, (S1) Sydney One Way - $420, (S2) Sydney Return - $575, (P1) Perth One Way - $510, (P2) Perth Return - $700")
-        tripCode = input()
-        tripCode = tripCode.lower()
-        if tripCode == "c1" or tripCode == "c2" or tripCode == "s1" or tripCode == "s2" or tripCode == "p1" or tripCode == "p2":
+        print("Please select the destination for your return trip. Fare prices are listed below. \n(C)airns – $400 \n(S)ydney – $575 \n(P)erth - $700")
+        tripDestination = input()
+        tripDestination = tripDestination.lower()
+        if tripDestination == "c" or tripDestination == "s" or tripDestination == "p":
             switchCode = True
         else:
-            print("ERROR: Input not recognised. Please input the correct code which is indicated in brackets. The first letter is for the destination. 1 means one way, 2 means return trip.")
-    return tripCode
+            print("ERROR: Input not recognised. Please input the correct code letter for your destination which is indicated in brackets. ")
+    return tripDestination
 
 def getClassCode():
     #asks user for seating class. Ensures users entry matches expected
@@ -85,20 +85,14 @@ def getTypeCode():
             print("ERROR: Input not recognised. Please enter the letter in brackets to complete the intended action.")
     return typeCode
 
-def checkAssign(passengerName, passengerAge, tripCode, classCode, typeCode):
+def checkAssign(passengerName, passengerAge, tripDestination, classCode, typeCode):
     # assigns users entry codes to real words.
-    if tripCode == "c1":
-        tripDestination = "Cairns One Way"
-    elif tripCode == "c2":
-        tripDestination = "Cairns Return"
-    elif tripCode == "s1":
-        tripDestination = "Sydney One Way"
-    elif tripCode == "s2":
-        tripDestination = "Sydney Return"
-    elif tripCode == "p1":
-        tripDestination = "Perth One Way"
+    if tripDestination == "c":
+        tripDestination = "Cairns"
+    elif tripDestination == "s":
+        tripDestination = "Sydney"
     else:
-        tripDestination = "Perth Return"
+        tripDestination = "Perth"
 
     if classCode == "b":
         seatClassWord = "Business"
@@ -122,17 +116,18 @@ def formatCurrency(cost):
     cost = "${:,.2f}".format(cost)
     return cost
 
-def costCalculation(tripCode, typeCode, classCode, passengerAge):
+
+def costCalculation(tripDestination, flightType typeCode, classCode, passengerAge):
     # Calculates cost of trip from expected values
-    if tripCode == "c1":
+    if tripDestination == "c" and flightType == "o":
         tripValue = 250
-    elif tripCode == "c2":
+    elif tripDestination == "c" and flightType == "r":
         tripValue = 400
-    elif tripCode == "s1":
+    elif tripDestination == "s" and flightType == "o":
         tripValue = 420
-    elif tripCode == "s2":
+    elif tripDestination == "s" and flightType == "r":
         tripValue = 575
-    elif tripCode == "p1":
+    elif tripDestination == "p" and flightType == "o":
         tripValue = 510
     else:
         tripValue = 700
@@ -153,7 +148,7 @@ def costCalculation(tripCode, typeCode, classCode, passengerAge):
 
     if passengerAge <= 2:
         ageDiscount = 0
-    elif passengerAge <= 12 and passengerAge >= 3:
+    elif passengerAge <= 16 and passengerAge >= 3:
         ageDiscount = 0.5
     else:
         ageDiscount = 1
@@ -268,7 +263,8 @@ def main():
     ticketCost =  []
 
     while not exitProgram:
-        print("Tropic Airlines Ticket Ordering System: (I)nstructions, (O)rder ticket or (E)xit");
+        print("Tropic Airlines Ticket Ordering System: \n (I)nstructions \n (O)rder ticket \n (E)xit ");
+
         userInput = input()
         userInput = userInput.lower()
         if userInput == "o":
@@ -291,8 +287,9 @@ def main():
             quitProgram = True
 
         elif userInput == "i":
-            print("Thank you for choosing Tropical Airlines for your air travel needs. You will be asked questions regarding what type of ticket you would like to pruchase as well as destination information. We also offer 50% discounted fares for children under the age of 12. Children under the age of 2 are free.")
+            print("Thank you for choosing Tropical Airlines for your air travel needs. \nYou will be asked questions regarding what type of ticket you would like to purchase as well as destination information. \nWe also offer 50% discounted fares for children under the age of 16. Infants under the age of 2 are free.")
             print("You have been returned to the main menu.")
+            print(" ")
         else:
             print("ERROR: Input not recognised. Please enter the letter in brackets to complete the intended action.")
 
