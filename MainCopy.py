@@ -49,7 +49,7 @@ def getTripDestination():
     # ask users for destination, return or one way. Ensures users entry matches expected
     switchCode = False
     while switchCode == False:
-        print("Please select the destination for your return trip. Fare prices are listed below. \n(C)airns – $400 \n(S)ydney – $575 \n(P)erth - $700")
+        print("Please select the destination for your return trip. Base fare prices are listed below: \n(C)airns – $400 \n(S)ydney – $575 \n(P)erth - $700")
         tripDestination = input()
         tripDestination = tripDestination.lower()
         if tripDestination == "c" or tripDestination == "s" or tripDestination == "p":
@@ -57,6 +57,19 @@ def getTripDestination():
         else:
             print("ERROR: Input not recognised. Please input the correct code letter for your destination which is indicated in brackets. ")
     return tripDestination
+
+def getFlightType():
+    #ask users for return or one way
+    switchCode = False
+    while switchCode == False:
+        print("Is this a: \n(R)eturn trip  \n(O)ne-Way")
+        flightType = input()
+        flightType = flightType.lower()
+        if  flightType == "o" or flightType == "r":
+            switchCode = True
+        else:
+            ("ERROR: Input not recognised. Please input R for return or O for one way")
+    return flightType
 
 def getClassCode():
     #asks user for seating class. Ensures users entry matches expected
@@ -117,7 +130,7 @@ def formatCurrency(cost):
     return cost
 
 
-def costCalculation(tripDestination, flightType typeCode, classCode, passengerAge):
+def costCalculation(tripDestination, flightType, typeCode, classCode, passengerAge):
     # Calculates cost of trip from expected values
     if tripDestination == "c" and flightType == "o":
         tripValue = 250
@@ -182,7 +195,8 @@ def orderTicket(userName):
     # Enables user to order tickets, calls functions as needed
     passengerName = getName(userName)
     passengerAge = getAge()
-    tripCode = getTripCode()
+    tripDestination = getTripDestination()
+    flightTyoe = getFlightType()
     classCode = getClassCode()
     if classCode == "b" or classCode == "e":
         typeCode = getTypeCode()
