@@ -98,7 +98,7 @@ def getTypeCode():
             print("ERROR: Input not recognised. Please enter the letter in brackets to complete the intended action.")
     return typeCode
 
-def checkAssign(passengerName, passengerAge, tripDestination, classCode, typeCode):
+def checkAssign(passengerName, passengerAge, tripDestination, flightType, classCode, typeCode):
     # assigns users entry codes to real words.
     if tripDestination == "c":
         tripDestination = "Cairns"
@@ -121,7 +121,7 @@ def checkAssign(passengerName, passengerAge, tripDestination, classCode, typeCod
     else:
         seatTypeWord = "Middle"
 
-    check = " Ticket for: " + passengerName + ", Passenger age: " + str(passengerAge) + ", Trip destination: " + tripDestination + ", Seat class: " + seatClassWord + ", Seat type: " + seatTypeWord
+    check = " Ticket for: " + passengerName + ", Passenger age: " + str(passengerAge) + ", Trip destination: " + tripDestination + "(" + flightType + ") "+ ", Seat class: " + seatClassWord + ", Seat type: " + seatTypeWord
     return check
 
 def formatCurrency(cost):
@@ -196,7 +196,7 @@ def orderTicket(userName):
     passengerName = getName(userName)
     passengerAge = getAge()
     tripDestination = getTripDestination()
-    flightTyoe = getFlightType()
+    flightType = getFlightType()
     classCode = getClassCode()
     if classCode == "b" or classCode == "e":
         typeCode = getTypeCode()
@@ -205,8 +205,8 @@ def orderTicket(userName):
 
     acceptPurchase = False
     while acceptPurchase == False:
-        check = checkAssign(passengerName, passengerAge, tripCode, classCode, typeCode)
-        cost = costCalculation(tripCode, typeCode, classCode, passengerAge)
+        check = checkAssign(passengerName, passengerAge, tripDestination, flightType, classCode, typeCode)
+        cost = costCalculation(tripDestination, flightType, typeCode, classCode, passengerAge)
         print("Is the following information correct: " + check + " Your ticket will cost: " + str(cost))
         print("Is this information correct? (Y)es or (N)o?")
         correct = input()
@@ -216,7 +216,7 @@ def orderTicket(userName):
         elif correct == "n":
             repeatChangeSwitch = False
             while repeatChangeSwitch == False:
-                print("What would you like to change? " + "(N)ame, " + "(A)ge,  " + "(D)estination, " + "Seat (C)lass, " + "Seat (T)ype")
+                print("What would you like to change? " + "(N)ame, " + "(A)ge,  " + "(D)estination, " + "(F)light type, " + "Seat (C)lass, " + "Seat (T)ype")
                 change = input()
                 change = change.lower()
                 if change == "n":
@@ -228,8 +228,12 @@ def orderTicket(userName):
                     print("The passenger's age on the ticket has been changed.")
 
                 elif change == "d":
-                    tripCode = getTripCode()
-                    print("The flight has been changed.")
+                    tripDestination = getTripDestination()
+                    print("The flight destination has been changed.")
+
+                elif change == "f":
+                    flightType = getFlightType()
+                    print("The flight type has been changed")
 
                 elif change == "c":
                     classCode = getClassCode()
