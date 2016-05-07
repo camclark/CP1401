@@ -75,8 +75,9 @@ def getClassCode():
     #asks user for seating class. Ensures users entry matches expected
     switchCode = False
     while switchCode == False:
-        print("Please choose the type of fare. Fees are displayed below and are in addition to the basic fare; (B)usiness - $275, (E)conomy - $25, (F)rugal - $0")
+        print("Please choose the type of fare. Fees are displayed below and are in addition to the basic fare.")
         print("Please note choosing Frugal fare means you will not be offered a seat choice, it will be assigned to the ticketholder at travel time.")
+        print("(B)usiness - $275, \n(E)conomy - $25, \n(F)rugal - $0")
         classCode = input()
         classCode = classCode.lower()
         if classCode.lower() == "b" or classCode.lower() == "e" or classCode.lower() == "f":
