@@ -110,7 +110,7 @@ def costCalculation(tripDestination, flightType, seatType, seatClass, passengerA
 
 
 
-def acceptPurchase():
+def acceptPurchase(cost):
     # presents user with a y/n to purchase ticket.
     # should make it to return cost 0 if not accepted
     acceptSwitch = False
@@ -122,11 +122,12 @@ def acceptPurchase():
             print("Your ticket has been purchased. Thank you for flying with Tropical Airlines. You have been returned to the main menu.")
             acceptSwitch = True
         elif acceptPurchase == "n":
+            cost = "CANCELLED ORDER"
             print("Your ticket has not been purchased. You have been returned to the main menu.")
             acceptSwitch = True
         else:
             print("ERROR: Input not recognised. Please enter Y for yes or N for No.")
-    return acceptPurchase
+    return cost
 
 
 
@@ -174,7 +175,7 @@ def orderTicket(userName):
     cost = costCalculation(tripDestination,flightType,seatType,seatClass,passengerAge)
 
     print(" Ticket for: " + passengerName  +"\nPassenger age: " + str(passengerAge) + "\nTrip destination: " + tripDestination + "(" + flightType + ") " + "\nSeat class: " + seatClass + "\nSeat type: " + seatType + "\nTotal cost: " + cost)
-
+    cost = acceptPurchase(cost)
     return cost
 
 
