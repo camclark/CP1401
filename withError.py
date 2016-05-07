@@ -62,10 +62,7 @@ def getAge():
             print("Please ensure you entered the correct age of the passenger")
     return passengerAge
 
-def formatCurrency(cost):
-    # Formats cost
-    cost = "${:,.2f}".format(cost)
-    return cost
+
 
 
 def costCalculation(tripDestination, flightType, seatType, seatClass, passengerAge):
@@ -105,7 +102,7 @@ def costCalculation(tripDestination, flightType, seatType, seatClass, passengerA
         ageDiscount = 1
 
     cost = (tripValue + classValue + typeValue) * ageDiscount
-    cost = "${:,.2f}".format(cost)
+
     return cost
 
 
@@ -173,8 +170,9 @@ def orderTicket(userName):
 
 
     cost = costCalculation(tripDestination,flightType,seatType,seatClass,passengerAge)
+    costDisplay = "${:,.2f}".format(cost)
 
-    print(" Ticket for: " + passengerName  +"\nPassenger age: " + str(passengerAge) + "\nTrip destination: " + tripDestination + "(" + flightType + ") " + "\nSeat class: " + seatClass + "\nSeat type: " + seatType + "\nTotal cost: " + cost)
+    print(" Ticket for: " + passengerName  +"\nPassenger age: " + str(passengerAge) + "\nTrip destination: " + tripDestination + "(" + flightType + ") " + "\nSeat class: " + seatClass + "\nSeat type: " + seatType + "\nTotal cost: " + costDisplay)
     cost = acceptPurchase(cost)
     return cost
 
@@ -196,18 +194,29 @@ def main():
         elif userInput == "e":
             # exits program
             ticketCost.sort()
-            print(userName + " your orders are: ")
+
+
             ticketCostLength = len(ticketCost)
             i = 0
-            if ticketCostLength < 1:
-                print(userName + ", your order is: " + ticketCost + " Your final total is: " + ticketCost)
-            else:
+            if ticketCostLength ==1:
+                displayCost = "${:,.2f}".format(cost)
+                print(userName + " your orders are: \n" + userName + ", your order is: " + displayCost+ " Your final total is: " + displayCost)
+            elif ticketCostLength > 1:
+                print(userName + " your orders are: ")
                 for price in ticketCost:
                     i = i + 1
-                    print("Ticket " + str(i) + " " + price)
+                    displayCost = "${:,.2f}".format(price)
+                    print("Ticket " + str(i) + " " + displayCost)
+
+                total=0
+                for price in ticketCost:
+                    total = total + price
+                displayTotalCost = "${:,.2f}".format(total)
+                print("Your final total is: " + displayTotalCost)
+
 
             print("Thank you for choosing Tropical Airlines for your air travel needs.")
-            quitProgram = True
+            exitProgram = True
 
         elif userInput == "i":
             print(
