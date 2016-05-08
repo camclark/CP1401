@@ -2,7 +2,7 @@ def greeting():
     # appears on startup, asks for users name. Response saved as userName.
     print("Please enter your name:")
     userName = input()
-    print("Hello " + userName + " Welcome to the Tropical Airlines .")
+    print("Welcome " + userName)
     return userName
 
 def checkHandle(prompt,codeArray,wordArray):
@@ -182,18 +182,22 @@ def main():
         userInput = input()
         userInput = userInput.lower()
         if userInput == "o":
-            ticketCost.append(orderTicket(userName))
+            ticketInformation = orderTicket(userName)
+            if ticketInformation == "CANCELLED ORDER":
+                print("The ticket was not processed.")
+            else:
+                ticketCost.append(ticketInformation)
 
         elif userInput == "e":
             # exits program
             ticketCost.sort()
 
-
+            #detemine how long the array is, depending on length different actions
             ticketCostLength = len(ticketCost)
             i = 0
             if ticketCostLength ==1:
-                displayCost = "${:,.2f}".format(cost)
-                print(userName + " your orders are: \n" + userName + ", your order is: " + displayCost+ " Your final total is: " + displayCost)
+                displayCost = "${:,.2f}".format(ticketCost)
+                print(userName + ", your order is: " + displayCost+ " Your final total is: " + displayCost)
             elif ticketCostLength > 1:
                 print(userName + " your orders are: ")
                 for price in ticketCost:
