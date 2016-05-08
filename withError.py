@@ -138,26 +138,19 @@ def orderTicket(userName):
     codeArray = ["c", "s", "p"]
     wordArray = ["Cairns","Sydney","Perth"]
     prompt = "Please select the destination for your return trip. Base fare prices are listed below: \n(C)airns – $400 \n(S)ydney – $575 \n(P)erth - $700"
-
     tripDestination= checkHandle(prompt,codeArray,wordArray)
-
 
 
     codeArray = ["o", "r"]
     wordArray = ["one-way","return"]
     prompt = "Is this a: \n(R)eturn trip  \n(O)ne-Way"
-
-
     flightType = checkHandle(prompt,codeArray,wordArray)
-
 
 
     codeArray = ["b", "e","f"]
     wordArray = ["business", "economy", "frugal"]
     prompt = "Please choose the type of fare. Fees are displayed below and are in addition to the basic fare. \nPlease note choosing Frugal fare means you will not be offered a seat choice. \n(B)usiness - $275 \n(E)conomy - $25 \n(F)rugal - $0"
-
     seatType = checkHandle(prompt, codeArray, wordArray)
-
 
     if seatType == "frugal":
         seatClass = "middle"
