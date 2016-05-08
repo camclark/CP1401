@@ -8,7 +8,6 @@ def greeting():
 def checkHandle(prompt,codeArray,wordArray):
     switch = False
     while switch == False:
-            #If up to this part in main will run this if statement
                 #get input
                 print(prompt)
                 instanceInput = input()
@@ -177,7 +176,7 @@ def main():
     ticketCost = []
 
     while not exitProgram:
-        print("Tropic Airlines Ticket Ordering System: \n (I)nstructions \n (O)rder ticket \n (E)xit ");
+        print("Tropic Airlines Ticket Ordering System: \n (I)nstructions \n (O)rder ticket \n (E)xit ")
 
         userInput = input()
         userInput = userInput.lower()
