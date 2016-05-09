@@ -95,14 +95,22 @@ def costCalculation(tripDestination, flightType, seatType, seatClass, passengerA
 
     if passengerAge <= 2:
         ageDiscount = 0
+        ageDiscountEligibility = "(Eligiable for infant ticket - free)"
     elif passengerAge <= 16 and passengerAge >= 3:
         ageDiscount = 0.5
+        ageDiscountEligibility = "(Eligiable for child ticket - half price)"
     else:
         ageDiscount = 1
+        ageDiscountEligibility = "(Not eligiable for child ticket)"
 
     cost = (tripValue + classValue + typeValue) * ageDiscount
 
-    return cost
+    #format "$#.## - for display later"
+    tripValue = "${:,.2f}".format(tripValue)
+    classValue = "${:,.2f}".format(classValue)
+    typeValue = "${:,.2f}".format(typeValue)
+
+    return tripValue, classValue, typeValue, ageDiscountEligibility, cost
 
 
 
@@ -160,11 +168,10 @@ def orderTicket(userName):
 
         seatClass = checkHandle(prompt, codeArray, wordArray)
 
-
-    cost = costCalculation(tripDestination,flightType,seatType,seatClass,passengerAge)
+    tripValue, classValue, typeValue, ageDiscountEligibility, cost = costCalculation(tripDestination,flightType,seatType,seatClass,passengerAge)
     costDisplay = "${:,.2f}".format(cost)
 
-    print(" Ticket for: " + passengerName  +"\nPassenger age: " + str(passengerAge) + "\nTrip destination: " + tripDestination + "(" + flightType + ") " + "\nSeat class: " + seatClass + "\nSeat type: " + seatType + "\nTotal cost: " + costDisplay)
+    print(" Ticket for: " + passengerName + "\nPassenger age: " + str(passengerAge) + "\t" + ageDiscountEligibility + "\nTrip destination: " + tripDestination + "(" + flightType + ")\t" + tripValue  + "\nSeat class: " + seatClass + "\t\t\t\t\t" + classValue + "\nSeat type: " + seatType + "\t\t\t\t\t" + typeValue + "\nTotal cost: " + costDisplay)
     cost = acceptPurchase(cost)
     return cost
 
@@ -195,8 +202,8 @@ def main():
             ticketCostLength = len(ticketCost)
             i = 0
             if ticketCostLength ==1:
-                displayCost = "${:,.2f}".format(ticketCost)
-                print(userName + ", your order is: " + displayCost+ " Your final total is: " + displayCost)
+                ticketCost[0] = "${:,.2f}".format(ticketCost[0])
+                print(userName + ", your order is: " + ticketCost[0] + " Your final total is: " + ticketCost[0])
             elif ticketCostLength > 1:
                 print(userName + " your orders are: ")
                 for price in ticketCost:
