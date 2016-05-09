@@ -52,16 +52,18 @@ def getAge():
     while switch == False:
         print("How old is the person travelling? Travellers under 16 years old will receive a 50% discount for the child fare.")
         inputAge = input()
-        while not int(inputAge):
-            inputAge = input()
 
-        passengerAge = int(inputAge)
+        if not inputAge.isdigit():
+            print("Error: Please input numbers")
+            continue
+        else:
+            inputAge = int(inputAge)
 
-        if passengerAge >= 0 and passengerAge <= 130:
+        if inputAge >= 0 and inputAge <= 130:
             switch = True
         else:
             print("Please ensure you entered the correct age of the passenger")
-    return passengerAge
+    return inputAge
 
 
 
@@ -209,7 +211,7 @@ def main():
             elif ticketCostLength > 1:
                 print(userName + " your orders are: ")
                 for price in ticketCost:
-                    i = i + 1
+                    i += 1
                     displayCost = "${:,.2f}".format(price)
                     print("Ticket " + str(i) + " " + displayCost)
 
