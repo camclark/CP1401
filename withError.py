@@ -7,6 +7,7 @@ def greeting():
 
 def checkHandle(prompt,codeArray,wordArray):
     switch = False
+    wrongCheck = True
     while switch == False:
                 #get input
                 print(prompt)
@@ -17,10 +18,11 @@ def checkHandle(prompt,codeArray,wordArray):
                     if Number == instanceInput:
                         switch = True
                         instanceInput = wordArray[x]
+                        wrongCheck = False
                     x = x + 1
                         # Error message - none of the array match input
-                    if switch == "False":
-                        print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets")
+                if wrongCheck == True:
+                    print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
     return instanceInput
 
 def getName(userName):
