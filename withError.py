@@ -39,7 +39,7 @@ def checkHandle(prompt,codeArray,wordArray):
                     if Number == "y":
                         instanceInput = wordArray[0]
                         wrongCheck = False
-                    if Number == "n":
+                    if Number == "s":
                         instanceInput = input("Please enter the passenger's name")
                         wrongCheck = False
                 # Error message - none of the array match input
