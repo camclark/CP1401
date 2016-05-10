@@ -13,19 +13,19 @@ def checkHandle(prompt,codeArray,wordArray):
         switchAge = False
         while switchAge == False:
             print(prompt)
-            inputAge = input()
+            instanceInput = input()
 
-            if not inputAge.isdigit():
+            if not instanceInput.isdigit():
                 print("Error: Please input numbers")
                 continue
             else:
-                inputAge = int(inputAge)
+                instanceInput = int(instanceInput)
 
-            if inputAge >= 0 and inputAge <= 130:
+            if instanceInput >= 0 and instanceInput <= 130:
                 switchAge = True
             else:
                 print("Please ensure you entered the correct age of the passenger")
-        return inputAge
+
     elif len(codeArray) == 2:
         # asks user if ticket for them or other. If other asks for that persons name. Includes userproofing.
         switchFor = False
@@ -33,20 +33,18 @@ def checkHandle(prompt,codeArray,wordArray):
             print(prompt)
             instanceInput = input()
             instanceInput = instanceInput.lower()
-            x = 0
             for Number in codeArray:
                 if Number == instanceInput:
                     switchFor = True
                     if Number == "y":
                         instanceInput = wordArray[0]
-                    else:
+                        wrongCheck = False
+                    if Number == "n":
                         instanceInput = input("Please enter the passenger's name")
-                    wrongCheck = False
-                x = x + 1
+                        wrongCheck = False
                 # Error message - none of the array match input
             if wrongCheck == True:
-                print(
-                    "Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
+                print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
     else:
         while switch == False:
             # get input depending on which part up to
