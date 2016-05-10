@@ -26,7 +26,7 @@ def checkHandle(prompt,codeArray,wordArray):
             else:
                 print("Please ensure you entered the correct age of the passenger")
 
-    elif len(codeArray) == 2:
+    elif codeArray[0] == "y":
         # asks user if ticket for them or other. If other asks for that persons name. Includes userproofing.
         switchFor = False
         while switchFor == False:
