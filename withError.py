@@ -8,65 +8,63 @@ def greeting():
 def checkHandle(prompt,codeArray,wordArray):
     switch = False
     wrongCheck = True
-    while switch == False:
-                #get input
-                print(prompt)
-                instanceInput = input()
-                instanceInput = instanceInput.lower()
-                x = 0
-                for Number in codeArray:
-                    if Number == instanceInput:
-                        switch = True
-                        instanceInput = wordArray[x]
-                        wrongCheck = False
-                    x = x + 1
-                        # Error message - none of the array match input
-                if wrongCheck == True:
-                    print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
-    return instanceInput
+    #if loop - length of array
+    if len(codeArray) == 1:
+        switchAge = False
+        while switchAge == False:
+            print(prompt)
+            inputAge = input()
 
-def getName(userName):
-    # asks user if ticket for them or other. If other asks for that persons name. Includes userproofing.
-    switch = False
-    while switch == False:
-        print("Is the ticket for (Y)ou or (S)omeone else?")
-        ticketFor = input()
-        ticketFor = ticketFor.lower()
-        if  ticketFor == "y":
-            passengerName = userName
-            switch = True
-        elif ticketFor == "s":
-            print("Please enter the name of the person traveling")
-            passengerName = input()
-            if passengerName == " " or passengerName == "":
-                print("ERROR: Please input a name")
+            if not inputAge.isdigit():
+                print("Error: Please input numbers")
+                continue
             else:
-                switch = True
-        else:
-                print("ERROR: Input not recognised. Please input either (Y) for the ticket to be for yourself, or (S) for the ticket to be for someone else.")
-    return passengerName
+                inputAge = int(inputAge)
 
-def getAge():
-    # asks user for the passenger's age. Ensures age is within reasonable range.
-    switch = False
-    while switch == False:
-        print("How old is the person travelling? Travellers under 16 years old will receive a 50% discount for the child fare.")
-        inputAge = input()
+            if inputAge >= 0 and inputAge <= 130:
+                switchAge = True
+            else:
+                print("Please ensure you entered the correct age of the passenger")
+        return inputAge
+    elif len(codeArray) == 2:
+        # asks user if ticket for them or other. If other asks for that persons name. Includes userproofing.
+        switchFor = False
+        while switchFor == False:
+            print(prompt)
+            instanceInput = input()
+            instanceInput = instanceInput.lower()
+            x = 0
+            for Number in codeArray:
+                if Number == instanceInput:
+                    switchFor = True
+                    if Number == "y":
+                        instanceInput = wordArray[0]
+                    else:
+                        instanceInput = input("Please enter the passenger's name")
+                    wrongCheck = False
+                x = x + 1
+                # Error message - none of the array match input
+            if wrongCheck == True:
+                print(
+                    "Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
+    else:
+        while switch == False:
+            # get input depending on which part up to
+            print(prompt)
+            instanceInput = input()
+            instanceInput = instanceInput.lower()
+            x = 0
+            for Number in codeArray:
+                if Number == instanceInput:
+                    switch = True
+                    instanceInput = wordArray[x]
+                    wrongCheck = False
+                x = x + 1
+                # Error message - none of the array match input
+            if wrongCheck == True:
+                print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
 
-        if not inputAge.isdigit():
-            print("Error: Please input numbers")
-            continue
-        else:
-            inputAge = int(inputAge)
-
-        if inputAge >= 0 and inputAge <= 130:
-            switch = True
-        else:
-            print("Please ensure you entered the correct age of the passenger")
-    return inputAge
-
-
-
+    return instanceInput
 
 def costCalculation(tripDestination, flightType, seatType, seatClass, passengerAge):
     # Calculates cost of trip from expected values
@@ -142,9 +140,16 @@ def acceptPurchase(cost):
 
 
 def orderTicket(userName):
-    passengerName = getName(userName)
 
-    passengerAge = getAge()
+    codeArray = ["y", "s"]
+    wordArray = [userName, "default"]
+    prompt = "Is the ticket for (Y)ou or (S)omeone else?"
+    passengerName = checkHandle(prompt,codeArray,wordArray)
+
+    codeArray = ["a"]
+    wordArray = ["default"]
+    prompt = "What is the age of the passenger?"
+    passengerAge = checkHandle(prompt,codeArray,wordArray)
 
     codeArray = ["c", "s", "p"]
     wordArray = ["Cairns","Sydney","Perth"]
