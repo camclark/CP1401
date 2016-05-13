@@ -1,96 +1,86 @@
 def greeting():
     # appears on startup, asks for users name. Response saved as userName.
-    print("Please enter your name:")
-    userName = input()
-    print("Welcome " + userName)
+    userName = input("Please enter your name:\n")
+    print("Welcome " + userName + "\n")
     return userName
 
+
+def getAge():
+    #gets age from the user, ensure is within expected range
+    continueSwitch = False
+    while continueSwitch == False:
+        passengerAge = input("What is the age of the passenger?\n")
+
+        if not passengerAge.isdigit():
+            print("Error: Please input numbers")
+            continue
+        else:
+            passengerAge = int(passengerAge)
+
+        if passengerAge >= 0 and passengerAge <= 130:
+            continueSwitch = True
+        else:
+            print("Please ensure you entered the correct age of the passenger")
+    return passengerAge
+
 def checkHandle(prompt,codeArray,wordArray):
-    switch = False
+    #codes are passed in along with array
+    continueSwitch = False
     wrongCheck = True
-    #if loop - length of array
-    if len(codeArray) == 1:
-        switchAge = False
-        while switchAge == False:
-            print(prompt)
-            instanceInput = input()
-
-            if not instanceInput.isdigit():
-                print("Error: Please input numbers")
+    while continueSwitch == False:
+        #uses prompt provided
+        instanceInput = input(prompt + "\n")
+        instanceInput = instanceInput.lower()
+        #for i in len(codeArray):
+        #remove x fill in i where req
+        x = 0
+        for Number in codeArray:
+            #checks codeArray for expected
+            if Number == instanceInput:
+                continueSwitch = True
+                #changes user input into a word
+                instanceInput = wordArray[x]
+                wrongCheck = False
+            #special case for who for
+            elif len(codeArray) == 2 and instanceInput == "s":
+                instanceInput = input("Please enter the passenger's name\n")
+                continueSwitch = True
+                wrongCheck = False
                 continue
-            else:
-                instanceInput = int(instanceInput)
-
-            if instanceInput >= 0 and instanceInput <= 130:
-                switchAge = True
-            else:
-                print("Please ensure you entered the correct age of the passenger")
-
-    elif codeArray[0] == "y":
-        # asks user if ticket for them or other. If other asks for that persons name. Includes userproofing.
-        switchFor = False
-        while switchFor == False:
-            print(prompt)
-            instanceInput = input()
-            instanceInput = instanceInput.lower()
-            for Number in codeArray:
-                if Number == instanceInput:
-                    switchFor = True
-                    if Number == "y":
-                        instanceInput = wordArray[0]
-                        wrongCheck = False
-                    if Number == "s":
-                        instanceInput = input("Please enter the passenger's name")
-                        wrongCheck = False
-                # Error message - none of the array match input
-            if wrongCheck == True:
-                print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
-    else:
-        while switch == False:
-            # get input depending on which part up to
-            print(prompt)
-            instanceInput = input()
-            instanceInput = instanceInput.lower()
-            x = 0
-            for Number in codeArray:
-                if Number == instanceInput:
-                    switch = True
-                    instanceInput = wordArray[x]
-                    wrongCheck = False
-                x = x + 1
-                # Error message - none of the array match input
-            if wrongCheck == True:
-                print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
-
+            x = x + 1
+            # Error message - none of the array match input
+        if wrongCheck == True:
+            print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
     return instanceInput
 
 def costCalculation(tripDestination, flightType, seatType, seatClass, passengerAge):
     # Calculates cost of trip from expected values
-    if tripDestination == "Cairns" and flightType == "one-way":
+    if tripDestination == "Cairns" and flightType == "One-way":
         tripValue = 250
-    elif tripDestination == "Cairns" and flightType == "return":
+    elif tripDestination == "Cairns" and flightType == "Return":
         tripValue = 400
-    elif tripDestination == "Sydney" and flightType == "one-way":
+    elif tripDestination == "Sydney" and flightType == "One-way":
         tripValue = 420
-    elif tripDestination == "Sydney" and flightType == "return":
+    elif tripDestination == "Sydney" and flightType == "Return":
         tripValue = 575
-    elif tripDestination == "Perth" and flightType == "one-way":
+    elif tripDestination == "Perth" and flightType == "One-way":
         tripValue = 510
     else:
         tripValue = 700
 
-    if seatClass == "business":
+    if seatClass == "Business":
         classValue = 275
-    elif seatClass == "economy":
+    elif seatClass == "Economy":
         classValue = 25
     else:
         classValue = 0
 
-    if seatType == "window":
+    if seatType == "Window":
         typeValue = 75
-    elif seatType == "aisle":
+    elif seatType == "Aisle":
         typeValue = 50
     else:
+        seatType == "Middle"
         typeValue = -25
 
     if passengerAge <= 2:
@@ -105,7 +95,7 @@ def costCalculation(tripDestination, flightType, seatType, seatClass, passengerA
 
     cost = (tripValue + classValue + typeValue) * ageDiscount
 
-    #format "$#.## - for display later"
+    #format "$0.00 - for display later"
     tripValue = "${:,.2f}".format(tripValue)
     classValue = "${:,.2f}".format(classValue)
     typeValue = "${:,.2f}".format(typeValue)
@@ -116,14 +106,14 @@ def costCalculation(tripDestination, flightType, seatType, seatClass, passengerA
 
 def acceptPurchase(cost):
     # presents user with a y/n to purchase ticket.
-    # should make it to return cost 0 if not accepted
+    # returns as cancelled if not accepted
+    # otherwise leaves cost the way it is
     acceptSwitch = False
     while acceptSwitch == False:
-        print("Would you like to purchase this ticket: (Y)es or (N)o ")
-        acceptPurchase = input()
+        acceptPurchase = input("Would you like to purchase this ticket: (Y)es or (N)o \n")
         acceptPurchase = acceptPurchase.lower()
         if acceptPurchase == "y":
-            print("Your ticket has been purchased. Thank you for flying with Tropical Airlines. You have been returned to the main menu.")
+            print("Your ticket has been purchased. Thank you for flying with Tropical Airlines. \nYou have been returned to the main menu.")
             acceptSwitch = True
         elif acceptPurchase == "n":
             cost = "CANCELLED ORDER"
@@ -133,21 +123,16 @@ def acceptPurchase(cost):
             print("ERROR: Input not recognised. Please enter Y for yes or N for No.")
     return cost
 
-
-
-
-
 def orderTicket(userName):
+    #the main component of the program
+    #passes information in arrays to check handle - ensures information is expected
 
     codeArray = ["y", "s"]
-    wordArray = [userName, "default"]
+    wordArray = [userName]
     prompt = "Is the ticket for (Y)ou or (S)omeone else?"
     passengerName = checkHandle(prompt,codeArray,wordArray)
 
-    codeArray = ["a"]
-    wordArray = ["default"]
-    prompt = "What is the age of the passenger?"
-    passengerAge = checkHandle(prompt,codeArray,wordArray)
+    passengerAge = getAge()
 
     codeArray = ["c", "s", "p"]
     wordArray = ["Cairns","Sydney","Perth"]
@@ -156,29 +141,31 @@ def orderTicket(userName):
 
 
     codeArray = ["o", "r"]
-    wordArray = ["one-way","return"]
+    wordArray = ["One-way","Return"]
     prompt = "Is this a: \n(R)eturn trip  \n(O)ne-Way"
     flightType = checkHandle(prompt,codeArray,wordArray)
 
 
     codeArray = ["b", "e","f"]
-    wordArray = ["business", "economy", "frugal"]
+    wordArray = ["Business", "Economy", "Frugal"]
     prompt = "Please choose the type of fare. Fees are displayed below and are in addition to the basic fare. \nPlease note choosing Frugal fare means you will not be offered a seat choice. \n(B)usiness - $275 \n(E)conomy - $25 \n(F)rugal - $0"
-    seatType = checkHandle(prompt, codeArray, wordArray)
+    seatClass = checkHandle(prompt, codeArray, wordArray)
 
-    if seatType == "frugal":
-        seatClass = "middle"
+    if seatClass == "Frugal":
+        seatType = "Middle"
     else:
         codeArray = ["w", "a","m"]
-        wordArray = ["window", "aisle", "middle"]
+        wordArray = ["Window", "Aisle", "Middle"]
         prompt = "Please choose the seat type.  Choosing the middle seat will deduct 25 from the total fare. \n(W)indow  $75 \n(A)isle  $50 \n(M)iddle -$25"
 
-        seatClass = checkHandle(prompt, codeArray, wordArray)
+        seatType = checkHandle(prompt, codeArray, wordArray)
 
+    #calculate cost from codes
     tripValue, classValue, typeValue, ageDiscountEligibility, cost = costCalculation(tripDestination,flightType,seatType,seatClass,passengerAge)
     costDisplay = "${:,.2f}".format(cost)
 
-    print(" Ticket for: " + passengerName + "\nPassenger age: " + str(passengerAge) + "\t" + ageDiscountEligibility + "\nTrip destination: " + tripDestination + "(" + flightType + ")\t" + tripValue  + "\nSeat class: " + seatClass + "\t\t\t\t\t" + classValue + "\nSeat type: " + seatType + "\t\t\t\t\t" + typeValue + "\nTotal cost: " + costDisplay)
+    #ensure user wants ticket
+    print(" Ticket for: " + passengerName + "\nPassenger age: " + str(passengerAge) + "\t" + ageDiscountEligibility + "\nTrip destination: " + tripDestination + "(" + flightType + ")\t\t" + tripValue  + "\nSeat class: " + seatClass + "\t\t\t\t\t" + classValue + "\nSeat type: " + seatType + "\t\t\t\t\t\t" + typeValue + "\nTotal cost: " + costDisplay)
     cost = acceptPurchase(cost)
     return cost
 
@@ -190,7 +177,7 @@ def main():
     ticketCost = []
 
     while not exitProgram:
-        print("Tropic Airlines Ticket Ordering System: \n (I)nstructions \n (O)rder ticket \n (E)xit ")
+        print("Tropic Airlines Ticket Ordering System: \n(I)nstructions \n(O)rder ticket \n(E)xit ")
 
         userInput = input()
         userInput = userInput.lower()
@@ -229,10 +216,8 @@ def main():
             exitProgram = True
 
         elif userInput == "i":
-            print(
-                "Thank you for choosing Tropical Airlines for your air travel needs. \nYou will be asked questions regarding what type of ticket you would like to purchase as well as destination information. \nWe also offer 50% discounted fares for children under the age of 16. Infants under the age of 2 are free.")
-            print("You have been returned to the main menu.")
-            print(" ")
+            print("Thank you for choosing Tropical Airlines for your air travel needs. \nYou will be asked questions regarding what type of ticket you would like to purchase as well as destination information. \nWe also offer 50% discounted fares for children under the age of 16. Infants under the age of 2 are free.")
+            print("You have been returned to the main menu.\n")
         else:
             print("ERROR: Input not recognised. Please enter the letter in brackets to complete the intended action.")
 
