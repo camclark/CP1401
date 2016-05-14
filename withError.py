@@ -31,15 +31,12 @@ def checkHandle(prompt,codeArray,wordArray):
         #uses prompt provided
         instanceInput = input(prompt + "\n")
         instanceInput = instanceInput.lower()
-        #for i in len(codeArray):
-        #remove x fill in i where req
-        x = 0
-        for Number in codeArray:
+        for i in range (0,len(codeArray)):
             #checks codeArray for expected
-            if Number == instanceInput:
+            if codeArray[i] == instanceInput:
                 continueSwitch = True
                 #changes user input into a word
-                instanceInput = wordArray[x]
+                instanceInput = wordArray[i]
                 wrongCheck = False
             #special case for who for
             elif len(codeArray) == 2 and instanceInput == "s":
@@ -47,10 +44,9 @@ def checkHandle(prompt,codeArray,wordArray):
                 continueSwitch = True
                 wrongCheck = False
                 continue
-            x = x + 1
             # Error message - none of the array match input
         if wrongCheck == True:
-            print("Error input not recognised. \nPlease select what you would like by entering the corosponding letter in brackets \n")
+            print("Error input not recognized. \nPlease select what you would like by entering the corresponding letter in brackets \n")
     return instanceInput
 
 def costCalculation(tripDestination, flightType, seatType, seatClass, passengerAge):
@@ -85,13 +81,13 @@ def costCalculation(tripDestination, flightType, seatType, seatClass, passengerA
 
     if passengerAge <= 2:
         ageDiscount = 0
-        ageDiscountEligibility = "(Eligiable for infant ticket - free)"
+        ageDiscountEligibility = "(Eligible for infant ticket - free)"
     elif passengerAge <= 16 and passengerAge >= 3:
         ageDiscount = 0.5
-        ageDiscountEligibility = "(Eligiable for child ticket - half price)"
+        ageDiscountEligibility = "(Eligible for child ticket - half price)"
     else:
         ageDiscount = 1
-        ageDiscountEligibility = "(Not eligiable for child ticket)"
+        ageDiscountEligibility = "(Not Eligible for child ticket)"
 
     cost = (tripValue + classValue + typeValue) * ageDiscount
 
@@ -120,7 +116,7 @@ def acceptPurchase(cost):
             print("Your ticket has not been purchased. You have been returned to the main menu.")
             acceptSwitch = True
         else:
-            print("ERROR: Input not recognised. Please enter Y for yes or N for No.")
+            print("ERROR: Input not recognized. Please enter Y for yes or N for No.")
     return cost
 
 def orderTicket(userName):
@@ -192,12 +188,12 @@ def main():
             # exits program
             ticketCost.sort()
 
-            #detemine how long the array is, depending on length different actions
+            #determine how long the array is, depending on length different actions
             ticketCostLength = len(ticketCost)
             i = 0
             if ticketCostLength ==1:
                 ticketCost[0] = "${:,.2f}".format(ticketCost[0])
-                print(userName + ", your order is: " + ticketCost[0] + " Your final total is: " + ticketCost[0])
+                print(userName + ", your order is: " + ticketCost[0] + "\nYour final total is: " + ticketCost[0])
             elif ticketCostLength > 1:
                 print(userName + " your orders are: ")
                 for price in ticketCost:
