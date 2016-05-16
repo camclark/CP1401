@@ -23,28 +23,28 @@ def getAge():
             print("Please ensure you entered the correct age of the passenger")
     return passengerAge
 
-def checkHandle(prompt,codeArray,wordArray):
-    #codes are passed in along with array
+def checkHandle(prompt,codeList,wordList):
+    #codes are passed in along with List
     continueSwitch = False
     wrongCheck = True
     while continueSwitch == False:
         #uses prompt provided
         instanceInput = input(prompt + "\n")
         instanceInput = instanceInput.lower()
-        for i in range (0,len(codeArray)):
-            #checks codeArray for expected
-            if codeArray[i] == instanceInput:
+        for i in range (0,len(codeList)):
+            #checks codeList for expected
+            if codeList[i] == instanceInput:
                 continueSwitch = True
                 #changes user input into a word
-                instanceInput = wordArray[i]
+                instanceInput = wordList[i]
                 wrongCheck = False
             #special case for who for
-            elif len(codeArray) == 2 and instanceInput == "s":
+            elif len(codeList) == 2 and instanceInput == "s":
                 instanceInput = input("Please enter the passenger's name\n")
                 continueSwitch = True
                 wrongCheck = False
                 continue
-            # Error message - none of the array match input
+            # Error message - none of the List match input
         if wrongCheck == True:
             print("Error input not recognized. \nPlease select what you would like by entering the corresponding letter in brackets \n")
     return instanceInput
@@ -121,40 +121,40 @@ def acceptPurchase(cost):
 
 def orderTicket(userName):
     #the main component of the program
-    #passes information in arrays to check handle - ensures information is expected
+    #passes information in Lists to check handle - ensures information is expected
 
-    codeArray = ["y", "s"]
-    wordArray = [userName]
+    codeList = ["y", "s"]
+    wordList = [userName]
     prompt = "Is the ticket for (Y)ou or (S)omeone else?"
-    passengerName = checkHandle(prompt,codeArray,wordArray)
+    passengerName = checkHandle(prompt,codeList,wordList)
 
     passengerAge = getAge()
 
-    codeArray = ["c", "s", "p"]
-    wordArray = ["Cairns","Sydney","Perth"]
+    codeList = ["c", "s", "p"]
+    wordList = ["Cairns","Sydney","Perth"]
     prompt = "Please select the destination for your return trip. Base fare prices are listed below: \n(C)airns – $400 \n(S)ydney – $575 \n(P)erth - $700"
-    tripDestination= checkHandle(prompt,codeArray,wordArray)
+    tripDestination= checkHandle(prompt,codeList,wordList)
 
 
-    codeArray = ["o", "r"]
-    wordArray = ["One-way","Return"]
+    codeList = ["o", "r"]
+    wordList = ["One-way","Return"]
     prompt = "Is this a: \n(R)eturn trip  \n(O)ne-Way"
-    flightType = checkHandle(prompt,codeArray,wordArray)
+    flightType = checkHandle(prompt,codeList,wordList)
 
 
-    codeArray = ["b", "e","f"]
-    wordArray = ["Business", "Economy", "Frugal"]
+    codeList = ["b", "e","f"]
+    wordList = ["Business", "Economy", "Frugal"]
     prompt = "Please choose the type of fare. Fees are displayed below and are in addition to the basic fare. \nPlease note choosing Frugal fare means you will not be offered a seat choice. \n(B)usiness - $275 \n(E)conomy - $25 \n(F)rugal - $0"
-    seatClass = checkHandle(prompt, codeArray, wordArray)
+    seatClass = checkHandle(prompt, codeList, wordList)
 
     if seatClass == "Frugal":
         seatType = "Middle"
     else:
-        codeArray = ["w", "a","m"]
-        wordArray = ["Window", "Aisle", "Middle"]
+        codeList = ["w", "a","m"]
+        wordList = ["Window", "Aisle", "Middle"]
         prompt = "Please choose the seat type.  Choosing the middle seat will deduct 25 from the total fare. \n(W)indow  $75 \n(A)isle  $50 \n(M)iddle -$25"
 
-        seatType = checkHandle(prompt, codeArray, wordArray)
+        seatType = checkHandle(prompt, codeList, wordList)
 
     #calculate cost from codes
     tripValue, classValue, typeValue, ageDiscountEligibility, cost = costCalculation(tripDestination,flightType,seatType,seatClass,passengerAge)
@@ -188,7 +188,7 @@ def main():
             # exits program
             ticketCost.sort()
 
-            #determine how long the array is, depending on length different actions
+            #determine how long the List is, depending on length different actions
             ticketCostLength = len(ticketCost)
             i = 0
             if ticketCostLength ==1:
