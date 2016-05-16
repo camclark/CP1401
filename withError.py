@@ -89,7 +89,7 @@ def costCalculation(tripDestination, flightType, seatType, seatClass, passengerA
         ageDiscount = 1
         ageDiscountEligibility = "(Not Eligible for child ticket)"
 
-    cost = (tripValue + classValue + typeValue) * ageDiscount
+    cost = float((tripValue + classValue + typeValue) * ageDiscount)
 
     #format "$0.00 - for display later"
     tripValue = "${:,.2f}".format(tripValue)
