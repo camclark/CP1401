@@ -160,7 +160,7 @@ def orderTicket(userName):
     costDisplay = "${:,.2f}".format(cost)
 
     #ensure user wants ticket
-    print(" Ticket for: " + passengerName + "\nPassenger age: " + str(passengerAge) + "\t" + ageDiscountEligibility + "\nTrip destination: " + tripDestination + "(" + flightType + ")\t\t" + tripValue  + "\nSeat class: " + seatClass + "\t\t\t\t\t" + classValue + "\nSeat type: " + seatType + "\t\t\t\t\t\t" + typeValue + "\nTotal cost: " + costDisplay)
+    print("Ticket for: " + passengerName + "\nPassenger age: " + str(passengerAge) + "\t" + ageDiscountEligibility + "\nTrip destination: " + tripDestination + "(" + flightType + ")\t\t" + tripValue  + "\nSeat class: " + seatClass + "\t\t\t\t\t" + classValue + "\nSeat type: " + seatType + "\t\t\t\t\t\t" + typeValue + "\nTotal cost: " + costDisplay)
     cost = acceptPurchase(cost)
     return cost
 
