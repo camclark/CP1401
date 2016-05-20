@@ -1,5 +1,5 @@
 def greeting():
-    # appears on startup, asks for users name. Response saved as userName.
+    #ppears on startup, asks for users name. Response saved as userName.
     userName = input("Please enter your name:\n")
     print("Welcome " + userName + "\n")
     return userName
@@ -165,6 +165,8 @@ def orderTicket(userName):
     return cost
 
 def main():
+    #asks user what they would like to do, exit, information or order a ticket then runs appropriate commands
+    #once ticket(s) are ordered exiting main will print the tickets in ascending order and the total of the tickets
     userName = greeting()
     exitProgram = False
     ticketCost = []
